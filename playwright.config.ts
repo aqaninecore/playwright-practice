@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+require('dotenv').config({ path: './test-data/.env' })
 
 /**
  * Read environment variables from file.
@@ -22,7 +23,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html', { open: 'never' }], ['line'], ["allure-playwright"]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
 
@@ -30,6 +31,8 @@ export default defineConfig({
     httpCredentials: {
       username: 'guest',
       password: 'welcome2qauto',
+      // username: process.env.AUTH_USERNAME!,
+      // password: process.env.AUTH_PASSWORD!,
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -40,10 +43,26 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+
     {
-      name: 'chromium',
+      name: 'setup',
+      testMatch: 'tests/**.setup.ts',
       use: { ...devices['Desktop Chrome'] },
     },
+
+    {
+      name: 'e2e-smoke',
+      testIgnore: 'tests/setup/**.setup.ts',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup']
+    },
+
+    // {
+    //   name: 'practice',
+    //   testMatch: 'tests/practice/**.spec.ts',
+    //   use: { ...devices['Desktop Chrome'] },
+    //   dependencies: ['setup']
+    // },
 
     // {
     //   name: 'firefox',
