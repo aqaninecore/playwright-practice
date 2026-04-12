@@ -3,17 +3,14 @@ import { Locator, Page } from '@playwright/test'
 class SignUpForm {
   readonly page: Page
 
-  // Form fields
   readonly nameField: Locator
   readonly lastNameField: Locator
   readonly emailField: Locator
   readonly passwordField: Locator
   readonly repeatPasswordField: Locator
 
-  // Buttons
   readonly registerButton: Locator
 
-  // Validation
   readonly invalidFeedback: Locator
 
   constructor(page: Page) {
@@ -27,9 +24,6 @@ class SignUpForm {
     this.invalidFeedback = page.locator('.invalid-feedback')
   }
 
-  /**
-   * Navigate to homepage and open the Sign Up modal
-   */
   async openModal(): Promise<void> {
     await this.page.goto('/')
     await this.page.locator('.hero-descriptor_btn.btn.btn-primary').click()
