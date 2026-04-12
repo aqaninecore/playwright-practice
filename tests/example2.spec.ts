@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { after, afterEach, before, beforeEach} from 'node:test'
+import { test, expect } from '@playwright/test'
+import { after, afterEach, before, beforeEach } from 'node:test'
 
 // test.describe('Group of tests', () => {
 // test('has title', async ({ page }) => {
@@ -21,32 +21,31 @@ import { after, afterEach, before, beforeEach} from 'node:test'
 
 // })
 
-
 test.describe('Search', () => {
-    test('Successful sign in', async ({page}) => {
-        await page.goto('/')
-        await page.locator('nav', ({has: page.locator('New')})).highlight()
-        // await page.getByRole('heading', {name: 'Do more!'}).highlight()
-        // await page.getByRole('heading', {name: 'Do more!'}).highlight()
-        await page.getByText('Do', {exact: true}).highlight()
-    })
+  test('Successful sign in', async ({ page }) => {
+    await page.goto('/')
+    await page.locator('nav', { has: page.locator('New') }).highlight()
+    // await page.getByRole('heading', {name: 'Do more!'}).highlight()
+    // await page.getByRole('heading', {name: 'Do more!'}).highlight()
+    await page.getByText('Do', { exact: true }).highlight()
+  })
 
-    test('Filter', async ({page}) => {
-        await page.goto('/')
-        await page.locator('button').filter({hasText: 'Contacts'}).highlight()
-    })
+  test('Filter', async ({ page }) => {
+    await page.goto('/')
+    await page.locator('button').filter({ hasText: 'Contacts' }).highlight()
+  })
 
-    // test('Multiple Elements', async ({page}) => {
-    //     await page.goto('/')
-    //     await page.locator('button').last().highlight()
-    //     await page.locator('button').last().highlight()
-    //     await page.locator('button').nth(3).highlight()
+  // test('Multiple Elements', async ({page}) => {
+  //     await page.goto('/')
+  //     await page.locator('button').last().highlight()
+  //     await page.locator('button').last().highlight()
+  //     await page.locator('button').nth(3).highlight()
 
-    //     let button = page.locator('button')
+  //     let button = page.locator('button')
 
-    //     for (const button of await buttons.all()) {
-    //       console.log(await button.count())
-    //       console.log(await button.innerText())
-    //     }
-    // })
+  //     for (const button of await buttons.all()) {
+  //       console.log(await button.count())
+  //       console.log(await button.innerText())
+  //     }
+  // })
 })

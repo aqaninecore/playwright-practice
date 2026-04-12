@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
-import HomePage from '../pom/pages/HomePage';
-import SignInForm from '../pom/forms/SignInForm';
-import VALID_USER1 from '../test-data/users';
-import {faker} from '@faker-js/faker'
+import { test, expect } from '@playwright/test'
+import HomePage from '../pom/pages/HomePage'
+import SignInForm from '../pom/forms/SignInForm'
+//import VALID_USER1 from '../test-data/users';
+import { faker } from '@faker-js/faker'
 
 test.describe('Sign in test', () => {
   let homePage: HomePage
@@ -15,7 +15,6 @@ test.describe('Sign in test', () => {
   })
 
   test.describe('Sign In process', () => {
-
     test('Successful sign in', async ({ page }) => {
       await page.locator('#signinEmail').fill('razorbackrightnow@gmail.com')
       await page.locator('#signinPassword').fill('Balagan1234')
