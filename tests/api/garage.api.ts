@@ -1,5 +1,5 @@
-import test, { expect } from '@playwright/test'
-import { log } from 'node:console'
+import { test, expect } from '@playwright/test'
+import { VALID_USER1 } from '../../test-data/users'
 
 test.describe('Garage API tests', () => {
   test('Get all brands', async ({ request }) => {
@@ -17,7 +17,7 @@ test.describe('Garage API tests', () => {
   })
 
   test('Get user cars. Auth options 1', async ({ request }) => {
-    const signInResponse = await request.get('/api/auth/signin', {
+    const signInResponse = await request.post('/api/auth/signin', {
       data: {
         email: VALID_USER1.email,
         password: VALID_USER1.password,
