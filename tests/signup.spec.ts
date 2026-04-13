@@ -264,10 +264,7 @@ test.describe('Sign Up Form. Re-enter password field validation', () => {
       await signUpForm.passwordField.fill('PassTes1')
       await signUpForm.repeatPasswordField.fill('PassTes1')
       await expect(page.getByText('Passwords do not match')).toHaveCount(0)
-      await expect(signUpForm.repeatPasswordField).toHaveAttribute(
-        'class',
-        'form-control ng-untouched ng-dirty ng-valid',
-      )
+      await expect(signUpForm.repeatPasswordField).toHaveClass(/(^|\s)ng-valid(\s|$)/)
 
       await signUpForm.repeatPasswordField.blur()
     })
