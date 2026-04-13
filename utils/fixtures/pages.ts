@@ -9,6 +9,7 @@ type Pages = {
   homePage: HomePage
   garagePage: GaragePage
   forgotPasswordForm: ForgotPasswordForm
+  openSignInForm: SignInForm
 }
 
 export const test = base.extend<Pages>({
