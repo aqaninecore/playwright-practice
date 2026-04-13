@@ -16,14 +16,20 @@ test.describe('Sign Up Form. Name field validation', () => {
   test.describe('Positive cases', () => {
     test('Check valid input with 2 symbols', async () => {
       await signUpForm.nameField.fill('Go')
+      await signUpForm.nameField.blur()
+      await expect(signUpForm.invalidFeedback).toBeHidden()
     })
 
     test('Check valid input with 10 symbols', async () => {
       await signUpForm.nameField.fill('LENGTHtest')
+      await signUpForm.nameField.blur()
+      await expect(signUpForm.invalidFeedback).toBeHidden()
     })
 
     test('Check valid input with 20 symbols', async () => {
       await signUpForm.nameField.fill('LENGTHtestMOREsymbol')
+      await signUpForm.nameField.blur()
+      await expect(signUpForm.invalidFeedback).toBeHidden()
     })
   })
 
