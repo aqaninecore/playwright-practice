@@ -325,7 +325,7 @@ test.describe('Successful Sign Up. Functional testing', () => {
     })
 
     test('Check successful Sign Up', async ({ page }) => {
-      const uniqueEmail = `alias_${Date.now()}@example.com`
+      const uniqueEmail = `alias_${crypto.randomUUID()}@example.com`
 
       // Set up response interception BEFORE the action that triggers the request.
       // This is a key difference from Cypress: in Playwright the promise must be
