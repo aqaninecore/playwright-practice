@@ -17,7 +17,10 @@ class SignInForm extends BasePage {
     this.wrongDataError = this.page.locator('div.invalid-feedback p')
   }
 
-  async login(email: string)
+  async login(email: string): Promise<void> {
+    await this.emailField.fill(email)
+    await this.loginButton.click()
+  }
 }
 
 export default SignInForm
