@@ -9,7 +9,7 @@ class SignInForm extends BasePage {
   private readonly wrongDataError: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.emailField = this.page.locator('signinEmail')
     this.passwordField = this.page.locator('signinPassword')
     this.loginButton = this.page.getByRole('button', { name: 'Login' })
