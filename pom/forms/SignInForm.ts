@@ -10,8 +10,8 @@ class SignInForm extends BasePage {
 
   constructor(page: Page) {
     this.page = page
-    this.emailField = this.page.locator('signinEmail')
-    this.passwordField = this.page.locator('signinPassword')
+    this.emailField = this.page.locator('#signinEmail')
+    this.passwordField = this.page.locator('#signinPassword')
     this.loginButton = this.page.getByRole('button', { name: 'Login' })
     this.validationError = this.page.locator('div.invalid-feedback p')
     this.wrongDataError = this.page.locator('div.invalid-feedback p')
