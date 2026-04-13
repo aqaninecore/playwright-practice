@@ -1,4 +1,4 @@
-import test from '@playwright/test'
+import { test } from '@playwright/test'
 import HomePage from '../../pom/pages/HomePage'
 import SignInForm from '../../pom/forms/SignInForm'
 //import { Sign } from 'node:crypto';
