@@ -16,6 +16,8 @@ export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
+  /* Increase timeout for CI due to network latency */
+  timeout: process.env.CI ? 60000 : 30000,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -28,8 +30,8 @@ export default defineConfig({
   use: {
     baseURL: 'https://qauto.forstudy.space',
     httpCredentials: {
-      username: process.env.AUTH_USERNAME ?? 'guest',
-      password: process.env.AUTH_PASSWORD ?? 'welcome2qauto',
+      username: process.env.AUTH_USERNAME || 'guest',
+      password: process.env.AUTH_PASSWORD || 'welcome2qauto',
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
