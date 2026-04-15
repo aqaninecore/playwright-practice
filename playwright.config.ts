@@ -21,17 +21,15 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 1 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 4 : undefined,
+  workers: process.env.CI ? 4 : 4,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html', { open: 'never' }], ['line'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: 'https://qauto.forstudy.space',
     httpCredentials: {
-      //username: 'guest',
-      //password: 'welcome2qauto',
-      username: process.env.AUTH_USERNAME!,
-      password: process.env.AUTH_PASSWORD!,
+      username: process.env.AUTH_USERNAME ?? 'guest',
+      password: process.env.AUTH_PASSWORD ?? 'welcome2qauto',
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
