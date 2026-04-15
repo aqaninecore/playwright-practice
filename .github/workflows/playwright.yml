@@ -1,31 +1,31 @@
 name: Playwright Simple Tests
 on:
   push:
-    branches: [ main, master, 31-lesson ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master, 31-lesson ]
+    branches: [main, master]
 jobs:
   test:
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
       AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
       AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
-    timeout-minutes: 60
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: actions/setup-node@v6
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps   # try npx playwright install chromium --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test --project=e2e-smoke
-    - uses: actions/upload-artifact@v6
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps # try npx playwright install chromium --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test --project=e2e-smoke
+      - uses: actions/upload-artifact@v6
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
