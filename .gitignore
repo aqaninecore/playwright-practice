@@ -10,4 +10,6 @@ node_modules/
 allure**
 results.json
 results
-/test-data/state
+/test-data/states
+test-data/users.ts
+test-data/states/validUser1StorageState.json
