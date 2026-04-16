@@ -35,10 +35,9 @@ test.describe('Cars API. Create car', () => {
   })
 
   test('GET user cars', async ({ request }) => {
-    const cookie = getSidForUser('validUser1')
     const response = await request.get('/api/cars', {
       headers: {
-        Cookie: `sid=${cookie}`,
+        Cookie: `sid=${sid}`,
       },
     })
     expect(response.status()).toBe(200)
