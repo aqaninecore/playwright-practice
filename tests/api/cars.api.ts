@@ -102,8 +102,8 @@ test.describe('Profile page mock', () => {
 
     let capturedResponse: any
 
-    await page.route('**/api/users/profile', (route) => {
-      route.fulfill({
+    await page.route('**/api/users/profile', async (route) => {
+      await route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify(MOCKED_PROFILE),
