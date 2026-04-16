@@ -5,8 +5,10 @@ test.describe('Garage page test', () => {
   test.use({ storageState: './test-data/states/validUser1StorageState.json' })
 
   test.beforeEach(async ({ app }) => {
-    app.page.on('request', (request) => console.log('>>', request.method(), request.url()))
-    app.page.on('response', (response) => console.log('<<', response.status(), response.url()))
+    if (process.env.DEBUG) {
+      app.page.on('request', (request) => console.log('>>', request.method(), request.url()))
+      app.page.on('response', (response) => console.log('<<', response.status(), response.url()))
+    }
     await app.garagePage.open()
   })
 
