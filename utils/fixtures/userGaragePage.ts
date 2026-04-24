@@ -9,13 +9,9 @@ type MyFixtures = {
 }
 
 export const test = base.extend<MyFixtures>({
-  authenticatedContext: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      storageState: './test-data/states/validUser1StorageState.json',
-    })
-    const page = await context.newPage()
+  storageState: './test-data/states/validUser1StorageState.json',
+  authenticatedContext: async ({ context, page }, use) => {
     await use({ context, page })
-    await context.close()
   },
   userGaragePage: async ({ authenticatedContext }, use) => {
     const garagePage = new GaragePage(authenticatedContext.page)
