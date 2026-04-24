@@ -11,3 +11,5 @@ export class AuthController {
     return response
   }
 }
+
+export const authController = new AuthController()

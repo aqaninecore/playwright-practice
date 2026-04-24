@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
-require('dotenv').config({ path: './test-data/.env' })
+require('dotenv').config()
 
 /**
  * Read environment variables from file.
@@ -23,20 +23,23 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 1 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 4 : 4,
+  workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'never' }], ['line'], ['allure-playwright']],
+  reporter: [['html', { open: 'never' }], ['list'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'https://qauto.forstudy.space',
+    baseURL: process.env.BASE_URL,
     httpCredentials: {
-      username: process.env.AUTH_USERNAME || 'guest',
-      password: process.env.AUTH_PASSWORD || 'welcome2qauto',
+      username: process.env.AUTH_USERNAME!,
+      password: process.env.AUTH_PASSWORD!,
+    },
+    launchOptions: {
+      slowMo: process.env.SLOW_MO ? parseInt(process.env.SLOW_MO) : 0,
     },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    video: 'retain-on-failure',
-    screenshot: 'on-first-failure',
+    video: 'off',
+    screenshot: 'off',
     trace: 'retain-on-failure',
   },
 
@@ -44,14 +47,21 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
-      testMatch: 'tests/**.setup.ts',
+      testMatch: '**/setup/*.setup.ts',
       use: { ...devices['Desktop Chrome'] },
     },
 
     {
       name: 'e2e-smoke',
-      testIgnore: 'tests/setup/**.setup.ts',
+      testMatch: ['**/*.spec.ts'],
+      testIgnore: '**/setup/*.setup.ts',
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+    },
+
+    {
+      name: 'api-smoke',
+      testMatch: ['**/*.api.ts'],
       dependencies: ['setup'],
     },
 
